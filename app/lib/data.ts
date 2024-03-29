@@ -9,21 +9,22 @@ import {
   Revenue,
 } from './definitions';
 import { formatCurrency } from './utils';
+import { unstable_noStore as noStore } from 'next/cache';
 
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.
   // This is equivalent to in fetch(..., {cache: 'no-store'}).
-
+  noStore();
   try {
     // Artificially delay a response for demo purposes.
     // Don't do this in production :)
 
-    // console.log('Fetching revenue data...');
-    // await new Promise((resolve) => setTimeout(resolve, 3000));
+    console.log('Fetching revenue data...');
+    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const data = await sql<Revenue>`SELECT * FROM revenue`;
 
-    // console.log('Data fetch completed after 3 seconds.');
+    console.log('Data fetch completed after 3 seconds.');
 
     return data.rows;
   } catch (error) {
@@ -33,6 +34,7 @@ export async function fetchRevenue() {
 }
 
 export async function fetchLatestGigs() {
+  noStore();
   try {
     const data = await sql<LatestGigRaw>`
       SELECT gigs.amount, workers.name, workers.image_url, workers.email, gigs.id
@@ -53,6 +55,7 @@ export async function fetchLatestGigs() {
 }
 
 export async function fetchCardData() {
+  noStore();
   try {
     // You can probably combine these into a single SQL query
     // However, we are intentionally splitting them to demonstrate
@@ -92,6 +95,7 @@ export async function fetchFilteredGigs(
   query: string,
   currentPage: number,
 ) {
+  noStore();
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
@@ -124,6 +128,7 @@ export async function fetchFilteredGigs(
 }
 
 export async function fetchGigsPages(query: string) {
+  noStore();
   try {
     const count = await sql`SELECT COUNT(*)
     FROM gigs
@@ -145,6 +150,7 @@ export async function fetchGigsPages(query: string) {
 }
 
 export async function fetchGigById(id: string) {
+  noStore();
   try {
     const data = await sql<GigForm>`
       SELECT
@@ -170,6 +176,7 @@ export async function fetchGigById(id: string) {
 }
 
 export async function fetchWorkers() {
+  noStore();
   try {
     const data = await sql<WorkerField>`
       SELECT
@@ -188,6 +195,7 @@ export async function fetchWorkers() {
 }
 
 export async function fetchFilteredWorkers(query: string) {
+  noStore();
   try {
     const data = await sql<WorkersTableType>`
 		SELECT
@@ -221,6 +229,7 @@ export async function fetchFilteredWorkers(query: string) {
 }
 
 export async function getUser(email: string) {
+  noStore();
   try {
     const user = await sql`SELECT * FROM users WHERE email=${email}`;
     return user.rows[0] as User;
