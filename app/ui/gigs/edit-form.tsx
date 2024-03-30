@@ -9,6 +9,7 @@ import {
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { Button } from '@/app/ui/button';
+import { updateGig } from '@/app/lib/actions';
 
 export default function EditGigForm({
   gig,
@@ -17,8 +18,11 @@ export default function EditGigForm({
   gig: GigForm;
   workers: WorkerField[];
 }) {
+
+  const updateInvoiceWithId = updateGig.bind(null, gig.id);
+
   return (
-    <form>
+    <form action={updateInvoiceWithId}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Worker Name */}
         <div className="mb-4">

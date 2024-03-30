@@ -1,5 +1,6 @@
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import { deleteGig } from '@/app/lib/actions';
 
 export function CreateGig() {
   return (
@@ -16,7 +17,7 @@ export function CreateGig() {
 export function UpdateGig({ id }: { id: string }) {
   return (
     <Link
-      href="/dashboard/gigs"
+      href={`/dashboard/gigs/${id}/edit`}
       className="rounded-md border p-2 hover:bg-gray-100"
     >
       <PencilIcon className="w-5" />
@@ -25,12 +26,13 @@ export function UpdateGig({ id }: { id: string }) {
 }
 
 export function DeleteGig({ id }: { id: string }) {
+  const deleteGigWithId = deleteGig.bind(null, id);
   return (
-    <>
+    <form action={deleteGigWithId}>
       <button className="rounded-md border p-2 hover:bg-gray-100">
         <span className="sr-only">Delete</span>
         <TrashIcon className="w-5" />
       </button>
-    </>
+    </form>
   );
 }
