@@ -6,6 +6,11 @@ import { lusitana } from '@/app/ui/fonts';
 import { GigsTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
 import { fetchGigsPages } from '@/app/lib/data';
+import { Metadata } from 'next';
+ 
+export const metadata: Metadata = {
+  title: 'Gigs',
+};
  
 export default async function Page({
   searchParams,
