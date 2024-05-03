@@ -7,6 +7,12 @@ const users = [
     email: 'user@nextmail.com',
     password: '123456',
   },
+  {
+    id: '410544b2-4001-4271-9855-fec4b6a6442b',
+    name: 'Jefferson Lim',
+    email: 'jefflim.dev@gmail.com',
+    password: '123456',
+  },
 ];
 
 const workers = [
@@ -78,91 +84,144 @@ const gigs = [
     amount: 15795,
     status: 'pending',
     date: '2022-12-06',
+    user_id: users[0].id,
+    title: 'title 1',
+    details: 'details',
+    end_date: '2024-10-4',
+    worker_name: 'Bob'
   },
   {
     worker_id: workers[1].id,
     amount: 20348,
     status: 'pending',
     date: '2022-11-14',
+    user_id: users[0].id,
+    title: 'title 2',
+    details: 'details',
+    end_date: '2024-10-5',
+    worker_name: 'Ann'
   },
   {
     worker_id: workers[4].id,
     amount: 3040,
     status: 'paid',
     date: '2022-10-29',
+    user_id: users[0].id,
+    title: 'title 3',
+    details: 'details',
+    end_date: '2024-10-6',
+    worker_name: 'Sue'
   },
   {
     worker_id: workers[3].id,
     amount: 44800,
     status: 'paid',
     date: '2023-09-10',
+    user_id: users[0].id,
+    title: 'title 4',
+    details: 'details',
+    end_date: '2024-10-7',
+    worker_name: 'Juorge'
   },
   {
     worker_id: workers[5].id,
     amount: 34577,
     status: 'pending',
     date: '2023-08-05',
+    user_id: users[0].id,
+    title: 'title 4',
+    details: 'details',
+    end_date: '2024-10-10',
+    worker_name: 'George'
   },
   {
     worker_id: workers[7].id,
     amount: 54246,
     status: 'pending',
     date: '2023-07-16',
+    user_id: users[0].id,
+    title: 'title 5',
+    details: 'details',
+    end_date: '2024-10-8',
+    worker_name: 'Jazz'
   },
   {
     worker_id: workers[6].id,
     amount: 666,
     status: 'pending',
     date: '2023-06-27',
+    user_id: users[0].id,
+    title: 'title 6',
+    details: 'details',
+    end_date: '2024-10-11',
+    worker_name: 'Jasmine'
   },
   {
     worker_id: workers[3].id,
     amount: 32545,
     status: 'paid',
     date: '2023-06-09',
+    user_id: users[1].id,
+    title: 'title 1',
+    details: 'details',
+    end_date: '2024-10-4',
+    worker_name: 'Fred'
   },
   {
     worker_id: workers[4].id,
     amount: 1250,
     status: 'paid',
     date: '2023-06-17',
+    user_id: users[1].id,
+    title: 'title 2',
+    details: 'details',
+    end_date: '2024-10-5',
+    worker_name: 'Frank'
   },
   {
     worker_id: workers[5].id,
     amount: 8546,
     status: 'paid',
     date: '2023-06-07',
+    user_id: users[1].id,
+    title: 'title 3',
+    details: 'details',
+    end_date: '2024-10-6',
+    worker_name: 'Will'
   },
   {
     worker_id: workers[1].id,
     amount: 500,
     status: 'paid',
     date: '2023-08-19',
+    user_id: users[1].id,
+    title: 'title 4',
+    details: 'details',
+    end_date: '2024-10-7',
+    worker_name: 'Maddie'
   },
   {
     worker_id: workers[5].id,
     amount: 8945,
     status: 'paid',
     date: '2023-06-03',
+    user_id: users[1].id,
+    title: 'title 5',
+    details: 'details',
+    end_date: '2024-10-7',
+    worker_name: 'Susan'
   },
   {
     worker_id: workers[2].id,
     amount: 8945,
     status: 'paid',
     date: '2023-06-18',
-  },
-  {
-    worker_id: workers[0].id,
-    amount: 8945,
-    status: 'paid',
-    date: '2023-10-04',
-  },
-  {
-    worker_id: workers[2].id,
-    amount: 1000,
-    status: 'paid',
-    date: '2022-06-05',
-  },
+    user_id: users[1].id,
+    title: 'title 6',
+    details: 'details',
+    end_date: '2024-10-8',
+    worker_name: 'Pablo'
+  }
 ];
 
 const revenue = [

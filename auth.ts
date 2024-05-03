@@ -3,7 +3,8 @@ import { authConfig } from './auth.config';
 import Credentials from '@auth/core/providers/credentials';
 import { z } from 'zod';
 import { sql } from '@vercel/postgres';
-import type { User } from '@/app/lib/definitions';
+// import type { User } from '@/app/lib/definitions';
+import type { User } from "next-auth"
 import bcrypt from 'bcrypt';
 
 async function getUser(email: string): Promise<User | undefined> {
@@ -33,7 +34,7 @@ async function getUser(email: string): Promise<User | undefined> {
  
             if (passwordsMatch) return user;
           }
-          
+
           console.log('Invalid credentials');
           return null;
         },

@@ -10,10 +10,13 @@ import {
 } from './definitions';
 import { formatCurrency } from './utils';
 import { unstable_noStore as noStore } from 'next/cache';
+import { auth } from '@/auth';
 
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.
   // This is equivalent to in fetch(..., {cache: 'no-store'}).
+  const session = await auth();
+  const user_id = session?.token.sub;
   noStore();
   try {
     // Artificially delay a response for demo purposes.
@@ -34,12 +37,15 @@ export async function fetchRevenue() {
 }
 
 export async function fetchLatestGigs() {
+  const session = await auth();
+  const user_id = session?.token.sub;
   noStore();
   try {
     const data = await sql<LatestGigRaw>`
-      SELECT gigs.amount, workers.name, workers.image_url, workers.email, gigs.id
+      SELECT gigs.id, gigs.amount, gigs.title, gigs.worker_name, gigs.date, gigs.end_date, gigs.status
       FROM gigs
-      JOIN workers ON gigs.worker_id = workers.id
+      JOIN users ON gigs.user_id = users.id
+      WHERE gigs.user_id = ${user_id}
       ORDER BY gigs.date DESC
       LIMIT 5`;
 
@@ -47,6 +53,7 @@ export async function fetchLatestGigs() {
       ...gig,
       amount: formatCurrency(gig.amount),
     }));
+    console.log('latest gigs: ', latestGigs);
     return latestGigs;
   } catch (error) {
     console.error('Database Error:', error);
@@ -55,6 +62,9 @@ export async function fetchLatestGigs() {
 }
 
 export async function fetchCardData() {
+  const session = await auth();
+  const user_id = session?.token.sub;
+
   noStore();
   try {
     // You can probably combine these into a single SQL query
@@ -95,6 +105,8 @@ export async function fetchFilteredGigs(
   query: string,
   currentPage: number,
 ) {
+  const session = await auth();
+  const user_id = session?.token.sub;
   noStore();
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
@@ -104,41 +116,41 @@ export async function fetchFilteredGigs(
         gigs.id,
         gigs.amount,
         gigs.date,
+        gigs.end_date,
         gigs.status,
-        workers.name,
-        workers.email,
-        workers.image_url
+        gigs.title,
+        gigs.worker_name
       FROM gigs
-      JOIN workers ON gigs.worker_id = workers.id
       WHERE
-        workers.name ILIKE ${`%${query}%`} OR
-        workers.email ILIKE ${`%${query}%`} OR
-        gigs.amount::text ILIKE ${`%${query}%`} OR
+        (gigs.amount::text ILIKE ${`%${query}%`} OR
+        gigs.worker_name::text ILIKE ${`%${query}%`} OR
+        gigs.title::text ILIKE ${`%${query}%`} OR
         gigs.date::text ILIKE ${`%${query}%`} OR
-        gigs.status ILIKE ${`%${query}%`}
+        gigs.status ILIKE ${`%${query}%`}) AND
+        gigs.user_id = ${user_id}
       ORDER BY gigs.date DESC
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `;
-
     return gigs.rows;
   } catch (error) {
-    console.error('Database Error:', error);
     throw new Error('Failed to fetch gigs.');
   }
 }
 
 export async function fetchGigsPages(query: string) {
+  const session = await auth();
+  const user_id = session?.token.sub;
   noStore();
   try {
     const count = await sql`SELECT COUNT(*)
     FROM gigs
-    JOIN workers ON gigs.worker_id = workers.id
     WHERE
-      workers.name ILIKE ${`%${query}%`} OR
-      workers.email ILIKE ${`%${query}%`} OR
-      gigs.amount::text ILIKE ${`%${query}%`} OR
+      (gigs.amount::text ILIKE ${`%${query}%`} OR
+      gigs.worker_name::text ILIKE ${`%${query}%`} OR
+      gigs.title::text ILIKE ${`%${query}%`} OR
       gigs.date::text ILIKE ${`%${query}%`} OR
-      gigs.status ILIKE ${`%${query}%`}
+      gigs.status ILIKE ${`%${query}%`}) AND
+      gigs.user_id = ${user_id}
   `;
 
     const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
@@ -157,7 +169,10 @@ export async function fetchGigById(id: string) {
         gigs.id,
         gigs.worker_id,
         gigs.amount,
-        gigs.status
+        gigs.status,
+        gigs.title,
+        gigs.details,
+        gigs.worker_name
       FROM gigs
       WHERE gigs.id = ${id};
     `;

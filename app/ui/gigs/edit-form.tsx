@@ -29,7 +29,7 @@ export default function EditGigForm({
     <form action={dispatch}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Worker Name */}
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label htmlFor="worker" className="mb-2 block text-sm font-medium">
             Choose worker
           </label>
@@ -55,6 +55,34 @@ export default function EditGigForm({
           <div id="worker-error" aria-live="polite" aria-atomic="true">
             {state.errors?.workerId &&
               state.errors.workerId.map((error: string) => (
+                <p className="mt-2 text-sm text-red-500" key={error}>
+                  {error}
+                </p>
+              ))}
+          </div>
+        </div> */}
+
+        {/* Gig Title */}
+        <div className="mb-4">
+          <label htmlFor="title" className="mb-2 block text-sm font-medium">
+            Choose a title
+          </label>
+          <div className="relative mt-2 rounded-md">
+            <div className="relative">
+              <input
+                id="title"
+                name="title"
+                type="text"
+                defaultValue={gig.title}
+                placeholder="Enter title"
+                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                aria-describedby="gig-title-error"
+              />
+            </div>
+          </div>
+          <div id="gig-title-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.title &&
+              state.errors.title.map((error: string) => (
                 <p className="mt-2 text-sm text-red-500" key={error}>
                   {error}
                 </p>
@@ -89,6 +117,54 @@ export default function EditGigForm({
                   {error}
                 </p>
               ))}
+          </div>
+        </div>
+
+        {/* Gig Details */}
+        <div className="mb-4">
+          <label htmlFor="details" className="mb-2 block text-sm font-medium">
+            Summary
+          </label>
+          <div className="relative mt-2 rounded-md">
+            <div className="relative">
+              <input
+                id="details"
+                name="details"
+                type="text"
+                defaultValue={gig.details}
+                placeholder="Enter details"
+                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                aria-describedby="gig-details-error"
+              />
+            </div>
+          </div>
+          <div id="gig-details-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.details &&
+              state.errors.details.map((error: string) => (
+                <p className="mt-2 text-sm text-red-500" key={error}>
+                  {error}
+                </p>
+              ))}
+          </div>
+        </div>
+
+        {/* Worker Name */}
+        <div className="mb-4">
+          <label htmlFor="worker_name" className="mb-2 block text-sm font-medium">
+            Enter Worker
+          </label>
+          <div className="relative mt-2 rounded-md">
+            <div className="relative">
+              <input
+                id="worker_name"
+                name="worker_name"
+                type="text"
+                defaultValue={gig.worker_name}
+                placeholder="Enter worker name"
+                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                aria-describedby="gig-worker_name-error"
+              />
+            </div>
           </div>
         </div>
 

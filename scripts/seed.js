@@ -57,7 +57,12 @@ async function seedGigs(client) {
     worker_id UUID NOT NULL,
     amount INT NOT NULL,
     status VARCHAR(255) NOT NULL,
-    date DATE NOT NULL
+    date DATE NOT NULL,
+    user_id UUID NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    details VARCHAR(255) NOT NULL,
+    end_date DATE NOT NULL,
+    worker_name VARCHAR(255) NOT NULL
   );
 `;
 
@@ -67,8 +72,8 @@ async function seedGigs(client) {
     const insertedGigs = await Promise.all(
       gigs.map(
         (gig) => client.sql`
-        INSERT INTO gigs (worker_id, amount, status, date)
-        VALUES (${gig.worker_id}, ${gig.amount}, ${gig.status}, ${gig.date})
+        INSERT INTO gigs (worker_id, amount, status, date, user_id, title, details, end_date, worker_name)
+        VALUES (${gig.worker_id}, ${gig.amount}, ${gig.status}, ${gig.date}, ${gig.user_id}, ${gig.title},${gig.details}, ${gig.end_date}, ${gig.worker_name})
         ON CONFLICT (id) DO NOTHING;
       `,
       ),

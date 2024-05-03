@@ -26,13 +26,13 @@ export default async function GigsTable({
                 <div className="flex items-center justify-between border-b pb-4">
                   <div>
                     <div className="mb-2 flex items-center">
-                      <Image
+                      {/* <Image
                         src={gig.image_url}
                         className="mr-2 rounded-full"
                         width={28}
                         height={28}
                         alt={`${gig.name}'s profile picture`}
-                      />
+                      /> */}
                       <p>{gig.name}</p>
                     </div>
                     <p className="text-sm text-gray-500">{gig.email}</p>
@@ -58,10 +58,10 @@ export default async function GigsTable({
             <thead className="rounded-lg text-left text-sm font-normal">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                  Worker
+                  Title
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Email
+                  Worker
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Amount
@@ -85,18 +85,11 @@ export default async function GigsTable({
                 >
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex items-center gap-3">
-                      <Image
-                        src={gig.image_url}
-                        className="rounded-full"
-                        width={28}
-                        height={28}
-                        alt={`${gig.name}'s profile picture`}
-                      />
-                      <p>{gig.name}</p>
+                      <p>{gig.title}</p>
                     </div>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {gig.email}
+                    {gig.worker_name}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     {formatCurrency(gig.amount)}

@@ -7,6 +7,7 @@ export type User = {
   name: string;
   email: string;
   password: string;
+  phone?: string;
 };
 
 export type Worker = {
@@ -24,6 +25,12 @@ export type Gig = {
   // In TypeScript, this is called a string union type.
   // It means that the "status" property can only be one of the two strings: 'pending' or 'paid'.
   status: 'pending' | 'paid';
+  // new 
+  user_id: string;
+  title: string;
+  details: string;
+  end_date?: string;
+  worker_name?: string;
 };
 
 export type Revenue = {
@@ -37,6 +44,13 @@ export type LatestGig = {
   image_url: string;
   email: string;
   amount: string;
+  //new
+  user_id: string;
+  title: string;
+  details: string;
+  end_date?: string;
+  worker_name?: string;
+  status: 'pending' | 'paid';
 };
 
 // The database returns a number for amount, but we later format it to a string with the formatCurrency function
@@ -53,6 +67,12 @@ export type GigsTable = {
   date: string;
   amount: number;
   status: 'pending' | 'paid';
+  //new
+  user_id: string;
+  title: string;
+  details: string;
+  end_date?: string;
+  worker_name?: string;
 };
 
 export type WorkersTableType = {
@@ -85,4 +105,10 @@ export type GigForm = {
   worker_id: string;
   amount: number;
   status: 'pending' | 'paid';
+  //new
+  user_id: string;
+  title: string;
+  details: string;
+  end_date?: string;
+  worker_name: string;
 };
