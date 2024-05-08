@@ -88,7 +88,9 @@ const gigs = [
     title: 'title 1',
     details: 'details',
     end_date: '2024-10-4',
-    worker_name: 'Bob'
+    worker_name: 'Bob',
+    county: 'la',
+    region: 'lb'
   },
   {
     worker_id: workers[1].id,
@@ -99,7 +101,10 @@ const gigs = [
     title: 'title 2',
     details: 'details',
     end_date: '2024-10-5',
-    worker_name: 'Ann'
+    worker_name: 'Ann',
+    county: 'la',
+    region: 'westla'
+
   },
   {
     worker_id: workers[4].id,
@@ -110,7 +115,9 @@ const gigs = [
     title: 'title 3',
     details: 'details',
     end_date: '2024-10-6',
-    worker_name: 'Sue'
+    worker_name: 'Sue',
+    county: 'la',
+    region: 'sgv'
   },
   {
     worker_id: workers[3].id,
@@ -121,7 +128,9 @@ const gigs = [
     title: 'title 4',
     details: 'details',
     end_date: '2024-10-7',
-    worker_name: 'Juorge'
+    worker_name: 'Juorge',
+    county: 'la',
+    region: 'lb'
   },
   {
     worker_id: workers[5].id,
@@ -132,7 +141,9 @@ const gigs = [
     title: 'title 4',
     details: 'details',
     end_date: '2024-10-10',
-    worker_name: 'George'
+    worker_name: 'George',
+    county: 'oc',
+    region: 'irvine'
   },
   {
     worker_id: workers[7].id,
@@ -143,7 +154,9 @@ const gigs = [
     title: 'title 5',
     details: 'details',
     end_date: '2024-10-8',
-    worker_name: 'Jazz'
+    worker_name: 'Jazz',
+    county: 'oc',
+    region: 'southoc'
   },
   {
     worker_id: workers[6].id,
@@ -154,7 +167,9 @@ const gigs = [
     title: 'title 6',
     details: 'details',
     end_date: '2024-10-11',
-    worker_name: 'Jasmine'
+    worker_name: 'Jasmine',
+    county: 'oc',
+    region: 'hb'
   },
   {
     worker_id: workers[3].id,
@@ -165,7 +180,9 @@ const gigs = [
     title: 'title 1',
     details: 'details',
     end_date: '2024-10-4',
-    worker_name: 'Fred'
+    worker_name: 'Fred',
+    county: 'oc',
+    region: 'westminster'
   },
   {
     worker_id: workers[4].id,
@@ -176,7 +193,9 @@ const gigs = [
     title: 'title 2',
     details: 'details',
     end_date: '2024-10-5',
-    worker_name: 'Frank'
+    worker_name: 'Frank',
+    county: 'oc',
+    region: 'irvine'
   },
   {
     worker_id: workers[5].id,
@@ -187,7 +206,9 @@ const gigs = [
     title: 'title 3',
     details: 'details',
     end_date: '2024-10-6',
-    worker_name: 'Will'
+    worker_name: 'Will',
+    county: 'la',
+    region: 'lb'
   },
   {
     worker_id: workers[1].id,
@@ -198,7 +219,9 @@ const gigs = [
     title: 'title 4',
     details: 'details',
     end_date: '2024-10-7',
-    worker_name: 'Maddie'
+    worker_name: 'Maddie',
+    county: 'la',
+    region: 'westla'
   },
   {
     worker_id: workers[5].id,
@@ -209,7 +232,9 @@ const gigs = [
     title: 'title 5',
     details: 'details',
     end_date: '2024-10-7',
-    worker_name: 'Susan'
+    worker_name: 'Susan',
+    county: 'la',
+    region: 'sgv'
   },
   {
     worker_id: workers[2].id,
@@ -220,7 +245,9 @@ const gigs = [
     title: 'title 6',
     details: 'details',
     end_date: '2024-10-8',
-    worker_name: 'Pablo'
+    worker_name: 'Pablo',
+    county: 'oc',
+    region: 'southoc'
   }
 ];
 

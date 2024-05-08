@@ -12,6 +12,8 @@ import { formatCurrency } from './utils';
 import { unstable_noStore as noStore } from 'next/cache';
 import { auth } from '@/auth';
 
+/* DASHBOARD */
+
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.
   // This is equivalent to in fetch(..., {cache: 'no-store'}).
@@ -109,6 +111,7 @@ export async function fetchFilteredGigs(
   const user_id = session?.token.sub;
   noStore();
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+  console.log('query used: ', query)
 
   try {
     const gigs = await sql<GigsTable>`
@@ -172,7 +175,9 @@ export async function fetchGigById(id: string) {
         gigs.status,
         gigs.title,
         gigs.details,
-        gigs.worker_name
+        gigs.worker_name,
+        gigs.date,
+        gigs.end_date
       FROM gigs
       WHERE gigs.id = ${id};
     `;
@@ -251,5 +256,62 @@ export async function getUser(email: string) {
   } catch (error) {
     console.error('Failed to fetch user:', error);
     throw new Error('Failed to fetch user.');
+  }
+}
+
+
+/* PUBLIC SITE */
+const PUBLIC_ITEMS_PER_PAGE = 2;
+export async function fetchPublicGigPosts(
+  countyId: string,
+  currentPage: number,
+  regionId?: string
+) {
+  noStore();
+  const offset = (currentPage - 1) * PUBLIC_ITEMS_PER_PAGE;
+
+  try {
+    const gigs = await sql<GigsTable>`
+      SELECT
+        gigs.id,
+        gigs.amount,
+        gigs.date,
+        gigs.end_date,
+        gigs.status,
+        gigs.title,
+        gigs.worker_name,
+        gigs.county,
+        gigs.region
+      FROM gigs
+      WHERE
+        gigs.county = ${countyId} AND
+        gigs.region = ${regionId}
+      ORDER BY gigs.date DESC
+      LIMIT ${PUBLIC_ITEMS_PER_PAGE} OFFSET ${offset}
+    `;
+    return gigs.rows;
+  } catch (error) {
+    throw new Error('Failed to fetch public gig posts.');
+  }
+}
+
+export async function fetchPublicGigPostsPages(
+  countyId: string,
+  regionId?: string
+) {
+  noStore();
+  try {
+    const count = await sql`SELECT COUNT(*)
+    FROM gigs
+    WHERE
+      gigs.county = ${countyId} AND
+      (gigs.region = ${regionId})
+  `;
+
+    const totalPages = Math.ceil(Number(count.rows[0].count) / PUBLIC_ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch total number of gigs.');
   }
 }

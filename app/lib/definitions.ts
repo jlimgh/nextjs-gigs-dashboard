@@ -1,6 +1,6 @@
 // This file contains type definitions for your data.
 // It describes the shape of the data, and what data type each property should accept.
-// For simplicity of teaching, we're manually defining these types.
+// For simpliregion of teaching, we're manually defining these types.
 // However, these types are generated automatically if you're using an ORM such as Prisma.
 export type User = {
   id: string;
@@ -31,6 +31,8 @@ export type Gig = {
   details: string;
   end_date?: string;
   worker_name?: string;
+  county: string;
+  region: string;
 };
 
 export type Revenue = {
@@ -51,6 +53,8 @@ export type LatestGig = {
   end_date?: string;
   worker_name?: string;
   status: 'pending' | 'paid';
+  county: string;
+  region: string;
 };
 
 // The database returns a number for amount, but we later format it to a string with the formatCurrency function
@@ -73,6 +77,8 @@ export type GigsTable = {
   details: string;
   end_date?: string;
   worker_name?: string;
+  county: string;
+  region: string;
 };
 
 export type WorkersTableType = {
@@ -111,4 +117,6 @@ export type GigForm = {
   details: string;
   end_date?: string;
   worker_name: string;
+  county: string;
+  region: string;
 };
