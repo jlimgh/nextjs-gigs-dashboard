@@ -113,7 +113,7 @@ export default async function Page({ params, searchParams }:{ params: { countyId
                             </div>
                             <div className="hidden basis-1/4 shrink-0 sm:flex sm:flex-col sm:items-end">
                               <p className="text-sm leading-6 text-gray-900">{gig.region}</p>
-                              <p className="mt-1 text-xs leading-5 text-gray-500">Last seen</p>
+                              <p className="mt-1 text-xs leading-5 text-gray-500">Complete by: {gig.end_date ? formatDateToLocal(gig.end_date) : '-'} </p>
                             </div>
                           </div>
                           </>

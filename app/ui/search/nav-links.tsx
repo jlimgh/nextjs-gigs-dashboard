@@ -102,48 +102,51 @@ export default function NavLinks() {
 
   return (
     <>
-      <form>
-        <label htmlFor="county-filter" className="mb-1 block text-sm font-medium">
-            County
-        </label>
-        <select
-            id="county-filter"
-            name="county-filter"
-            className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 mb-2"
-            defaultValue={selectedCounty?.key || ""}
-            aria-describedby="county-filter-error"
-        >
-            <option value="" disabled>
-                Select a county
-            </option>
-            {countyOptions.map((county) => (
-            <option key={county.key} value={county.key}>
-                {county.name}
-            </option>
-                ))}
-         </select>
-
-         <label htmlFor="region-filter" className="mb-1 block text-sm font-medium">
-            Region
-        </label>
-         <select
-            id="region-filter"
-            name="region-filter"
-            className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 mb-2"
-            defaultValue={selectedRegion?.key || ""}
-            aria-describedby="region-filter-error"
-        >
-            <option value="" disabled>
-                Select a region
-            </option>
-            {regionOptions?.map((region) => (
-            <option key={region.key} value={region.key}>
-                {region.name}
-            </option>
-                ))}
-         </select>
+      <form className="flex md:block gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium md:p-2 md:px-3">
+        <div className="mb-2">
+            <label htmlFor="county-filter" className="mb-1 block text-sm font-medium">
+                County
+            </label>
+            <select
+                id="county-filter"
+                name="county-filter"
+                className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 mb-2"
+                defaultValue={selectedCounty?.key || ""}
+                aria-describedby="county-filter-error"
+            >
+                <option value="" disabled>
+                    Select a county
+                </option>
+                {countyOptions.map((county) => (
+                <option key={county.key} value={county.key}>
+                    {county.name}
+                </option>
+                    ))}
+            </select>
+        </div>
+        <div>
+            <label htmlFor="region-filter" className="mb-1 block text-sm font-medium">
+                Region
+            </label>
+            <select
+                id="region-filter"
+                name="region-filter"
+                className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 mb-2"
+                defaultValue={selectedRegion?.key || ""}
+                aria-describedby="region-filter-error"
+            >
+                <option value="" disabled>
+                    Select a region
+                </option>
+                {regionOptions?.map((region) => (
+                <option key={region.key} value={region.key}>
+                    {region.name}
+                </option>
+                    ))}
+            </select>
+        </div>
       </form>
-      {links.map((link) => {
+      {/* {links.map((link) => {
         const LinkIcon = link.icon;
         return (
           <Link
@@ -160,7 +163,7 @@ export default function NavLinks() {
             <p className="hidden md:block">{link.name}</p>
           </Link>
         );
-      })}
+      })} */}
     </>
   );
 }

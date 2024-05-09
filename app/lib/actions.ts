@@ -22,6 +22,8 @@ const FormSchema = z.object({
         invalid_type_error: 'Please enter details'
     }),
     worker_name: z.string().optional(),
+    county: z.string(),
+    city: z.string(),
     user_id: z.string()
   });
 
@@ -34,7 +36,9 @@ export type State = {
       amount?: string[];
       status?: string[];
       details?: string[];
-      worker_name?: string[]
+      worker_name?: string[],
+      county?: string[],
+      city?: string[]
     };
     message?: string | null;
   };
@@ -48,7 +52,9 @@ export async function createGig(prevState: State, formData: FormData) {
         amount: formData.get('amount'),
         status: formData.get('status'),
         details: formData.get('details'),
-        worker_name: formData.get('worker_name')
+        worker_name: formData.get('worker_name'),
+        county: formData.get('county'),
+        city: formData.get('city'),
     });
 
     console.log('validedFields:' , validatedFields);
@@ -63,14 +69,14 @@ export async function createGig(prevState: State, formData: FormData) {
     }
 
     // Prepare data for insertion into the database
-    const { title, amount, status, details, worker_name } = validatedFields.data;
+    const { title, amount, status, details, worker_name, county, city } = validatedFields.data;
     const amountInCents = amount * 100;
     const date = new Date().toISOString().split('T')[0];
 
     try {
         await sql`
-            INSERT INTO gigs (title, amount, status, date, user_id, details, worker_name)
-            VALUES (${title}, ${amountInCents}, ${status}, ${date}, ${user_id}, ${details}, ${worker_name})
+            INSERT INTO gigs (title, amount, status, date, user_id, details, worker_name, county, city)
+            VALUES (${title}, ${amountInCents}, ${status}, ${date}, ${user_id}, ${details}, ${worker_name}, ${county}, ${city})
         `;
     } catch (error) {
         console.log('db error: ', error)
@@ -89,7 +95,9 @@ export async function updateGig(id: string, prevState: State, formData: FormData
       amount: formData.get('amount'),
       status: formData.get('status'),
       details: formData.get('details'),
-      worker_name: formData.get('worker_name')
+      worker_name: formData.get('worker_name'),
+      county: formData.get('county'),
+      city: formData.get('city'),
     });
 
     if (!validatedFields.success) {
@@ -99,13 +107,13 @@ export async function updateGig(id: string, prevState: State, formData: FormData
         };
     }
     
-    const { title, amount, status, details, worker_name } = validatedFields.data;
+    const { title, amount, status, details, worker_name, county, city } = validatedFields.data;
     const amountInCents = amount * 100;
    
     try {
         await sql`
             UPDATE gigs
-            SET title = ${title}, amount = ${amountInCents}, status = ${status}, details = ${details}, worker_name = ${worker_name}
+            SET title = ${title}, amount = ${amountInCents}, status = ${status}, details = ${details}, worker_name = ${worker_name}, county = ${county}, city = ${city}
             WHERE id = ${id}
         `;
     } catch (error) {

@@ -127,10 +127,10 @@ export default function EditGigForm({
           </label>
           <div className="relative mt-2 rounded-md">
             <div className="relative">
-              <input
+              <textarea
                 id="details"
                 name="details"
-                type="text"
+                rows={4}
                 defaultValue={gig.details}
                 placeholder="Enter details"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
